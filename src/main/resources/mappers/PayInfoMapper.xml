@@ -31,61 +31,61 @@
     insert into amall_pay_info (id, user_id, order_no, 
       pay_platform, platform_number, platform_status, 
       create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, 
-      #{payPlatform,jdbcType=INTEGER}, #{platformNumber,jdbcType=VARCHAR}, #{platformStatus,jdbcType=VARCHAR}, 
+    values (#{record.id,jdbcType=INTEGER}, #{record.userId,jdbcType=INTEGER}, #{record.orderNo,jdbcType=BIGINT},
+      #{record.payPlatform,jdbcType=INTEGER}, #{record.platformNumber,jdbcType=VARCHAR}, #{record.platformStatus,jdbcType=VARCHAR},
       now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.amall.pojo.PayInfo" >
     insert into amall_pay_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+      <if test="record.id != null" >
         id,
       </if>
-      <if test="userId != null" >
+      <if test="record.userId != null" >
         user_id,
       </if>
-      <if test="orderNo != null" >
+      <if test="record.orderNo != null" >
         order_no,
       </if>
-      <if test="payPlatform != null" >
+      <if test="record.payPlatform != null" >
         pay_platform,
       </if>
-      <if test="platformNumber != null" >
+      <if test="record.platformNumber != null" >
         platform_number,
       </if>
-      <if test="platformStatus != null" >
+      <if test="record.platformStatus != null" >
         platform_status,
       </if>
-      <if test="createTime != null" >
+      <if test="record.createTime != null" >
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+      <if test="record.id != null" >
+        #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+      <if test="record.userId != null" >
+        #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="orderNo != null" >
-        #{orderNo,jdbcType=BIGINT},
+      <if test="record.orderNo != null" >
+        #{record.orderNo,jdbcType=BIGINT},
       </if>
-      <if test="payPlatform != null" >
-        #{payPlatform,jdbcType=INTEGER},
+      <if test="record.payPlatform != null" >
+        #{record.payPlatform,jdbcType=INTEGER},
       </if>
-      <if test="platformNumber != null" >
-        #{platformNumber,jdbcType=VARCHAR},
+      <if test="record.platformNumber != null" >
+        #{record.platformNumber,jdbcType=VARCHAR},
       </if>
-      <if test="platformStatus != null" >
-        #{platformStatus,jdbcType=VARCHAR},
+      <if test="record.platformStatus != null" >
+        #{record.platformStatus,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         now(),
       </if>
     </trim>
@@ -93,39 +93,39 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.amall.pojo.PayInfo" >
     update amall_pay_info
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="orderNo != null" >
-        order_no = #{orderNo,jdbcType=BIGINT},
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=BIGINT},
       </if>
-      <if test="payPlatform != null" >
-        pay_platform = #{payPlatform,jdbcType=INTEGER},
+      <if test="record.payPlatform != null" >
+        pay_platform = #{record.payPlatform,jdbcType=INTEGER},
       </if>
-      <if test="platformNumber != null" >
-        platform_number = #{platformNumber,jdbcType=VARCHAR},
+      <if test="record.platformNumber != null" >
+        platform_number = #{record.platformNumber,jdbcType=VARCHAR},
       </if>
-      <if test="platformStatus != null" >
-        platform_status = #{platformStatus,jdbcType=VARCHAR},
+      <if test="record.platformStatus != null" >
+        platform_status = #{record.platformStatus,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         update_time = now(),
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.amall.pojo.PayInfo" >
     update amall_pay_info
-    set user_id = #{userId,jdbcType=INTEGER},
-      order_no = #{orderNo,jdbcType=BIGINT},
-      pay_platform = #{payPlatform,jdbcType=INTEGER},
-      platform_number = #{platformNumber,jdbcType=VARCHAR},
-      platform_status = #{platformStatus,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      order_no = #{record.orderNo,jdbcType=BIGINT},
+      pay_platform = #{record.payPlatform,jdbcType=INTEGER},
+      platform_number = #{record.platformNumber,jdbcType=VARCHAR},
+      platform_status = #{record.platformStatus,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = now()
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
 </mapper>

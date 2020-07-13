@@ -29,55 +29,55 @@
     insert into amall_cart (id, user_id, product_id, 
       quantity, checked, create_time, 
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
-      #{quantity,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER}, now(),
+    values (#{record.id,jdbcType=INTEGER}, #{record.userId,jdbcType=INTEGER}, #{record.productId,jdbcType=INTEGER},
+      #{record.quantity,jdbcType=INTEGER}, #{record.checked,jdbcType=INTEGER}, now(),
       now())
   </insert>
   <insert id="insertSelective" parameterType="com.amall.pojo.Cart" >
     insert into amall_cart
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+      <if test="record.id != null" >
         id,
       </if>
-      <if test="userId != null" >
+      <if test="record.userId != null" >
         user_id,
       </if>
-      <if test="productId != null" >
+      <if test="record.productId != null" >
         product_id,
       </if>
-      <if test="quantity != null" >
+      <if test="record.quantity != null" >
         quantity,
       </if>
-      <if test="checked != null" >
+      <if test="record.checked != null" >
         checked,
       </if>
-      <if test="createTime != null" >
+      <if test="record.createTime != null" >
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+      <if test="record.id != null" >
+        #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+      <if test="record.userId != null" >
+        #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="productId != null" >
-        #{productId,jdbcType=INTEGER},
+      <if test="record.productId != null" >
+        #{record.productId,jdbcType=INTEGER},
       </if>
-      <if test="quantity != null" >
-        #{quantity,jdbcType=INTEGER},
+      <if test="record.quantity != null" >
+        #{record.quantity,jdbcType=INTEGER},
       </if>
-      <if test="checked != null" >
-        #{checked,jdbcType=INTEGER},
+      <if test="record.checked != null" >
+        #{record.checked,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="record.createTime != null" >
         now(),
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         now(),
       </if>
     </trim>
@@ -85,35 +85,80 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.amall.pojo.Cart" >
     update amall_cart
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="productId != null" >
-        product_id = #{productId,jdbcType=INTEGER},
+      <if test="record.productId != null" >
+        product_id = #{record.productId,jdbcType=INTEGER},
       </if>
-      <if test="quantity != null" >
-        quantity = #{quantity,jdbcType=INTEGER},
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=INTEGER},
       </if>
-      <if test="checked != null" >
-        checked = #{checked,jdbcType=INTEGER},
+      <if test="record.checked != null" >
+        checked = #{record.checked,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         update_time = now(),
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.amall.pojo.Cart" >
     update amall_cart
-    set user_id = #{userId,jdbcType=INTEGER},
-      product_id = #{productId,jdbcType=INTEGER},
-      quantity = #{quantity,jdbcType=INTEGER},
-      checked = #{checked,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      product_id = #{record.productId,jdbcType=INTEGER},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      checked = #{record.checked,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = now()
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
+  <select id="selectCartByUserIdProductId" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from amall_cart
+    where user_id = #{userId}
+    and product_id = #{productId}
+  </select>
+  <select id="selectCartByUserId" resultMap="BaseResultMap" parameterType="int">
+    select
+    <include refid="Base_Column_List"/>
+     from amall_cart
+     where user_id = #{userId}
+  </select>
+  <select id="selectCartProductCheckedStatusByUserId" resultType="int" parameterType="int">
+    select count(1) from amall_cart where checked = 0 and user_id = #{userId}
+  </select>
+  <delete id="deleteByUserIdProductIds" parameterType="map">
+    delete from amall_cart
+    where user_id = #{userId}
+    <if test="productIds != null">
+      and product_id in 
+      <foreach collection="productIds" item="item" index="index" open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+  </delete>
+  <update id="checkedOrUnCheckedProduct" parameterType="map">
+    update amall_cart
+    set checked = #{checked},
+    update_time = now()
+    where user_id = #{userId}
+    <if test="productId != null">
+      and product_id = #{productId}
+    </if>
+  </update>
+  <select id="selectCartProductCount" resultType="int" parameterType="int">
+    select IFNULL(sum(quantity), 0) as count from amall_cart where user_id = #{userId}
+  </select>
+  <select id="selectCheckedCartByUserId" resultMap="BaseResultMap" parameterType="int">
+    SELECT
+    <include refid="Base_Column_List"/>
+     FROM amall_cart
+     WHERE user_id = #{userId}
+     AND checked = 1
+  </select>
 </mapper>

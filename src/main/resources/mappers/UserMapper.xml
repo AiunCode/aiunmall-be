@@ -33,9 +33,9 @@
       email, phone, question, 
       answer, role, create_time, 
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
-      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, now(),
+    values (#{record.id,jdbcType=INTEGER}, #{record.username,jdbcType=VARCHAR}, #{record.password,jdbcType=VARCHAR},
+      #{record.email,jdbcType=VARCHAR}, #{record.phone,jdbcType=VARCHAR}, #{record.question,jdbcType=VARCHAR},
+      #{record.answer,jdbcType=VARCHAR}, #{record.role,jdbcType=INTEGER}, now(),
       now())
   </insert>
   <insert id="insertSelective" parameterType="com.amall.pojo.User" >
@@ -74,31 +74,31 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{record.id,jdbcType=INTEGER},
       </if>
       <if test="username != null" >
-        #{username,jdbcType=VARCHAR},
+        #{record.username,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+        #{record.password,jdbcType=VARCHAR},
       </if>
       <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
+        #{record.email,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
+        #{record.phone,jdbcType=VARCHAR},
       </if>
       <if test="question != null" >
-        #{question,jdbcType=VARCHAR},
+        #{record.question,jdbcType=VARCHAR},
       </if>
       <if test="answer != null" >
-        #{answer,jdbcType=VARCHAR},
+        #{record.answer,jdbcType=VARCHAR},
       </if>
       <if test="role != null" >
-        #{role,jdbcType=INTEGER},
+        #{record.role,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
         now(),
@@ -108,47 +108,87 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.amall.pojo.User" >
     update amall_user
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=VARCHAR},
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
       </if>
-      <if test="question != null" >
-        question = #{question,jdbcType=VARCHAR},
+      <if test="record.question != null" >
+        question = #{record.question,jdbcType=VARCHAR},
       </if>
-      <if test="answer != null" >
-        answer = #{answer,jdbcType=VARCHAR},
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=VARCHAR},
       </if>
-      <if test="role != null" >
-        role = #{role,jdbcType=INTEGER},
+      <if test="record.role != null" >
+        role = #{record.role,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
-        now(),
+      <if test="record.updateTime != null" >
+        update_time = now(),
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.amall.pojo.User" >
     update amall_user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      question = #{question,jdbcType=VARCHAR},
-      answer = #{answer,jdbcType=VARCHAR},
-      role = #{role,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+    set username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      question = #{record.question,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="checkUsername" resultType="int" parameterType="string">
+    select count(1) from amall_user
+    where username = #{username}
+  </select>
+  <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from amall_user
+    where username = #{username}
+    and password = #{password}
+  </select>
+  <select id="checkEmail" resultType="int" parameterType="string">
+    select count(1) from amall_user
+    where email = #{email}
+  </select>
+  <select id="selectQuestionByUsername" resultType="string" parameterType="string">
+    select question from amall_user
+    where username = #{username}
+  </select>
+  <select id="checkAnswer" resultType="int" parameterType="map">
+    select count(1) from amall_user
+    where username = #{username}
+    and question = #{question}
+    and answer = #{answer}
+  </select>
+  <update id="updatePasswordByUsername" parameterType="map">
+    update amall_user
+    set password = #{newPassword},update_time = now()
+    where username = #{username}
+  </update>
+  <select id="checkPassword" resultType="int" parameterType="map">
+    select count(1) from amall_user
+    where id = #{userId}
+    and password = #{password}
+  </select>
+  <select id="checkEmailByUserId" resultType="int" parameterType="map">
+    select count(1) from amall_user
+    where email = #{email}
+    and id != #{userId}
+  </select>
 </mapper>

@@ -16,9 +16,9 @@
     <appender name="amall" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/amalllog/amall.log</File>-->
         <!--日志存储路径-->
-        <File>/developer/apache-tomcat-7.0.73/logs/amall.log</File>
+        <File>D:\LearnSoftware\Java\Tomcat\logs\amall.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/developer/apache-tomcat-7.0.73/logs/amall.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>D:\LearnSoftware\Java\Tomcat\logs\amall.log.%d{yyyy-MM-dd}.zip</fileNamePattern>
             <append>true</append>
             <!--存储时间10天-->
             <maxHistory>10</maxHistory>
@@ -32,9 +32,9 @@
 
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--<File>d:/amalllog/error.log</File>-->
-        <File>/developer/apache-tomcat-7.0.73/logs/error.log</File>
+        <File>D:\LearnSoftware\Java\Tomcat\logs\amall.log\error.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/devsoft/apache-tomcat-7.0.73/logs/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>D:\LearnSoftware\Java\Tomcat\logs\amall.log\error.log.%d{yyyy-MM-dd}.zip</fileNamePattern>
             <!--<fileNamePattern>d:/amalllog/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>-->
             <append>true</append>
             <maxHistory>10</maxHistory>
@@ -56,7 +56,7 @@
 
 
 
-    <!-- geelynote mybatis log 日志 -->
+    <!-- mybatis log 日志 -->
 
     <logger name="com.amall.dao" level="DEBUG"/>
 

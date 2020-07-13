@@ -37,87 +37,87 @@
       detail, price, stock, 
       status, create_time, update_time
       )
-    values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{subtitle,jdbcType=VARCHAR}, #{mainImage,jdbcType=VARCHAR}, #{subImages,jdbcType=VARCHAR}, 
-      #{detail,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, now(), now()
+    values (#{record.id,jdbcType=INTEGER}, #{record.categoryId,jdbcType=INTEGER}, #{record.name,jdbcType=VARCHAR},
+      #{record.subtitle,jdbcType=VARCHAR}, #{record.mainImage,jdbcType=VARCHAR}, #{record.subImages,jdbcType=VARCHAR},
+      #{record.detail,jdbcType=VARCHAR}, #{record.price,jdbcType=DECIMAL}, #{record.stock,jdbcType=INTEGER},
+      #{record.status,jdbcType=INTEGER}, now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.amall.pojo.Product" >
     insert into amall_product
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+      <if test="record.id != null" >
         id,
       </if>
-      <if test="categoryId != null" >
+      <if test="record.categoryId != null" >
         category_id,
       </if>
-      <if test="name != null" >
+      <if test="record.name != null" >
         name,
       </if>
-      <if test="subtitle != null" >
+      <if test="record.subtitle != null" >
         subtitle,
       </if>
-      <if test="mainImage != null" >
+      <if test="record.mainImage != null" >
         main_image,
       </if>
-      <if test="subImages != null" >
+      <if test="record.subImages != null" >
         sub_images,
       </if>
-      <if test="detail != null" >
+      <if test="record.detail != null" >
         detail,
       </if>
-      <if test="price != null" >
+      <if test="record.price != null" >
         price,
       </if>
-      <if test="stock != null" >
+      <if test="record.stock != null" >
         stock,
       </if>
-      <if test="status != null" >
+      <if test="record.status != null" >
         status,
       </if>
-      <if test="createTime != null" >
+      <if test="record.createTime != null" >
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+      <if test="record.id != null" >
+        #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="categoryId != null" >
-        #{categoryId,jdbcType=INTEGER},
+      <if test="record.categoryId != null" >
+        #{record.categoryId,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="subtitle != null" >
-        #{subtitle,jdbcType=VARCHAR},
+      <if test="record.subtitle != null" >
+        #{record.subtitle,jdbcType=VARCHAR},
       </if>
-      <if test="mainImage != null" >
-        #{mainImage,jdbcType=VARCHAR},
+      <if test="record.mainImage != null" >
+        #{record.mainImage,jdbcType=VARCHAR},
       </if>
-      <if test="subImages != null" >
-        #{subImages,jdbcType=VARCHAR},
+      <if test="record.subImages != null" >
+        #{record.subImages,jdbcType=VARCHAR},
       </if>
-      <if test="detail != null" >
-        #{detail,jdbcType=VARCHAR},
+      <if test="record.detail != null" >
+        #{record.detail,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
+      <if test="record.price != null" >
+        #{record.price,jdbcType=DECIMAL},
       </if>
-      <if test="stock != null" >
-        #{stock,jdbcType=INTEGER},
+      <if test="record.stock != null" >
+        #{record.stock,jdbcType=INTEGER},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+      <if test="record.status != null" >
+        #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         now(),
       </if>
     </trim>
@@ -125,55 +125,89 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.amall.pojo.Product" >
     update amall_product
     <set >
-      <if test="categoryId != null" >
-        category_id = #{categoryId,jdbcType=INTEGER},
+      <if test="record.categoryId != null" >
+        category_id = #{record.categoryId,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="subtitle != null" >
-        subtitle = #{subtitle,jdbcType=VARCHAR},
+      <if test="record.subtitle != null" >
+        subtitle = #{record.subtitle,jdbcType=VARCHAR},
       </if>
-      <if test="mainImage != null" >
-        main_image = #{mainImage,jdbcType=VARCHAR},
+      <if test="record.mainImage != null" >
+        main_image = #{record.mainImage,jdbcType=VARCHAR},
       </if>
-      <if test="subImages != null" >
-        sub_images = #{subImages,jdbcType=VARCHAR},
+      <if test="record.subImages != null" >
+        sub_images = #{record.subImages,jdbcType=VARCHAR},
       </if>
-      <if test="detail != null" >
-        detail = #{detail,jdbcType=VARCHAR},
+      <if test="record.detail != null" >
+        detail = #{record.detail,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
       </if>
-      <if test="stock != null" >
-        stock = #{stock,jdbcType=INTEGER},
+      <if test="record.stock != null" >
+        stock = #{record.stock,jdbcType=INTEGER},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         update_time = now(),
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.amall.pojo.Product" >
     update amall_product
-    set category_id = #{categoryId,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      subtitle = #{subtitle,jdbcType=VARCHAR},
-      main_image = #{mainImage,jdbcType=VARCHAR},
-      sub_images = #{subImages,jdbcType=VARCHAR},
-      detail = #{detail,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      stock = #{stock,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+    set category_id = #{record.categoryId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      main_image = #{record.mainImage,jdbcType=VARCHAR},
+      sub_images = #{record.subImages,jdbcType=VARCHAR},
+      detail = #{record.detail,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      stock = #{record.stock,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = now()
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
+  <select id="selectList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+     from amall_product
+     order by id asc
+  </select>
+  <select id="selectByNameAndProductId" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from amall_product
+    <where>
+      <if test="productName != null">
+        and name like #{productName}
+      </if>
+      <if test="productId != null">
+        and id = #{productId}
+      </if>
+    </where>
+  </select>
+  <select id="selectByNameAndCategoryIds" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from amall_product
+    where status = 1
+    <if test="productName != null">
+      and name like #{productName}
+    </if>
+    <if test="categoryIdList != null">
+      and category_id in
+      <foreach item="item" index="index" open="(" separator="," close=")" collection="categoryIdList">
+        #{item}
+      </foreach>
+    </if>
+  </select>
 </mapper>

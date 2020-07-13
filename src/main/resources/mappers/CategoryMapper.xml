@@ -29,55 +29,55 @@
     insert into amall_category (id, parent_id, name, 
       status, sort_order, create_time, 
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{status,jdbcType=BIT}, #{sortOrder,jdbcType=INTEGER}, now(),
+    values (#{record.id,jdbcType=INTEGER}, #{record.parentId,jdbcType=INTEGER}, #{record.name,jdbcType=VARCHAR},
+      #{record.status,jdbcType=BIT}, #{record.sortOrder,jdbcType=INTEGER}, now(),
       now())
   </insert>
   <insert id="insertSelective" parameterType="com.amall.pojo.Category" >
     insert into amall_category
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+      <if test="record.id != null" >
         id,
       </if>
-      <if test="parentId != null" >
+      <if test="record.parentId != null" >
         parent_id,
       </if>
-      <if test="name != null" >
+      <if test="record.name != null" >
         name,
       </if>
-      <if test="status != null" >
+      <if test="record.status != null" >
         status,
       </if>
-      <if test="sortOrder != null" >
+      <if test="record.sortOrder != null" >
         sort_order,
       </if>
-      <if test="createTime != null" >
+      <if test="record.createTime != null" >
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         update_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+      <if test="record.id != null" >
+        #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="parentId != null" >
-        #{parentId,jdbcType=INTEGER},
+      <if test="record.parentId != null" >
+        #{record.parentId,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=BIT},
+      <if test="record.status != null" >
+        #{record.status,jdbcType=BIT},
       </if>
-      <if test="sortOrder != null" >
-        #{sortOrder,jdbcType=INTEGER},
+      <if test="record.sortOrder != null" >
+        #{record.sortOrder,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         now(),
       </if>
     </trim>
@@ -85,35 +85,41 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.amall.pojo.Category" >
     update amall_category
     <set >
-      <if test="parentId != null" >
-        parent_id = #{parentId,jdbcType=INTEGER},
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=BIT},
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=BIT},
       </if>
-      <if test="sortOrder != null" >
-        sort_order = #{sortOrder,jdbcType=INTEGER},
+      <if test="record.sortOrder != null" >
+        sort_order = #{record.sortOrder,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="record.updateTime != null" >
         update_time = now(),
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{record.id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.amall.pojo.Category" >
     update amall_category
-    set parent_id = #{parentId,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      status = #{status,jdbcType=BIT},
-      sort_order = #{sortOrder,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+    set parent_id = #{record.parentId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT},
+      sort_order = #{record.sortOrder,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectCategoryChildrenByParentId" resultMap="BaseResultMap" parameterType="int">
+    select
+    <include refid="Base_Column_List" />
+    from amall_category
+    where parent_id = #{parentId}
+  </select>
 </mapper>
