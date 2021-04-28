@@ -42,7 +42,6 @@ public class FTPUtil {
     }
 
     /**
-     *
      * @param remotePath 远程路径（Linux下FTP是一个文件夹）
      * @param fileList
      * @return

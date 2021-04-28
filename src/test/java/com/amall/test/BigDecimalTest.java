@@ -1,8 +1,10 @@
 package com.amall.test;
 
+import com.sun.xml.internal.ws.api.pipe.NextAction;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.Scanner;
 
 public class BigDecimalTest {
     @Test
@@ -11,6 +13,7 @@ public class BigDecimalTest {
         System.out.println(1.0 - 0.42);
         System.out.println(4.015 * 100);
         System.out.println(123.3 / 100);
+        System.out.println(1.0-0.99);
     }
 
     @Test

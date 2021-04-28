@@ -16,6 +16,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author lenovo
+ */
 @Service("iCategoryService")
 public class CategoryServiceImpl implements ICategoryService {
     private Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
@@ -56,6 +59,7 @@ public class CategoryServiceImpl implements ICategoryService {
         }
         return ServerResponse.createByErrorMessage("更新品类名字失败");
     }
+
     @Override
     public ServerResponse<List<Category>> getChildrenParallelCategory(Integer categoryId) {
         List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentId(categoryId);

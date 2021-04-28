@@ -128,6 +128,14 @@ public class ProductManageController {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
     }
+
+    /**
+     * 文件上传
+     * @param session
+     * @param file 文件
+     * @param request
+     * @return
+     */
     @RequestMapping("upload.do")
     @ResponseBody
     public ServerResponse upload(HttpSession session, @RequestParam(value = "upload_file", required = false) MultipartFile file, HttpServletRequest request) {
