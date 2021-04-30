@@ -58,13 +58,11 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-
         <!-- targetPackage：mapper接口dao生成的位置 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.amall.dao" targetProject="./src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
-
 
         <table tableName="amall_shipping" domainObjectName="Shipping" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
         <table tableName="amall_cart" domainObjectName="Cart" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
@@ -77,7 +75,5 @@
             <columnOverride column="sub_images" jdbcType="VARCHAR" />
         </table>
         <table tableName="amall_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-
-        <!-- geelynote mybatis插件的搭建 -->
     </context>
 </generatorConfiguration>
