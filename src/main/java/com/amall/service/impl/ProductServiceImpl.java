@@ -221,7 +221,7 @@ public class ProductServiceImpl implements IProductService {
         productListVo.setMainImage(product.getMainImage());
         productListVo.setPrice(product.getPrice());
         productListVo.setSubtitle(product.getSubtitle());
-        productListVo.setImageHost(PropertiesUtil.getProperty("http://img.aiunmall.com/", "http://img.aiunmall.com/"));
+        productListVo.setImageHost(PropertiesUtil.getProperty("http://img.igggo.vip/", "http://img.igggo.vip/"));
         productListVo.setStatus(product.getStatus());
 
         return productListVo;
