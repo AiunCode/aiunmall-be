@@ -113,7 +113,7 @@ public class ProductServiceImpl implements IProductService {
         productDetailVo.setStatus(product.getStatus());
         productDetailVo.setStock(product.getStock());
 
-        productDetailVo.setImageHost(PropertiesUtil.getProperty("http://img.aiunmall.com/", "http://img.aiunmall.com/"));
+        productDetailVo.setImageHost(PropertiesUtil.getProperty("http://img.igggo.vip/", "http://img.igggo.vip/"));
 
         Category category = categoryMapper.selectByPrimaryKey(product.getCategoryId());
         if (category == null) {
