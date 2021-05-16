@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-<h2>Hello World!</h2>
+<h3>管理员操作</h3>
 <%--Spring MVC 上传文件--%>
 <form name="form1" action="/manage/product/upload.do" method="post" enctype="multipart/form-data">
 	<input type="file" name="upload_file"/>
