@@ -78,7 +78,12 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public ServerResponse<CartVo> deleteProduct(Integer userId, String productIds) {
-        List<String> productList = Splitter.on(",").splitToList(productIds);
+        List<String> productList = null;
+        //productList = Splitter.on(",").splitToList(productIds);
+        String[] productIdStrings = productIds.split(",");
+        for(String id : productIdStrings) {
+            productList.add(id);
+        }
         if (CollectionUtils.isEmpty(productList)) {
             return ServerResponse.createByErrorMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(), ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
