@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -78,7 +79,7 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public ServerResponse<CartVo> deleteProduct(Integer userId, String productIds) {
-        List<String> productList = null;
+        List<String> productList = new ArrayList<>();
         //productList = Splitter.on(",").splitToList(productIds);
         String[] productIdStrings = productIds.split(",");
         for(String id : productIdStrings) {
